@@ -1,0 +1,159 @@
+
+  304  [2025-05-12 09:30:20] kind --version
+  305  [2025-05-12 09:30:20] kubectl version --client
+  308  [2025-05-12 09:33:36] kubectl get nodes
+  309  [2025-05-12 09:34:54] kubectl get svc
+  310  [2025-05-12 09:38:17] kind delete cluster
+  311  [2025-05-12 09:38:18] cat <<EOF | kind create cluster --config=-
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "ingress-ready=true"
+  extraPortMappings:
+  - containerPort: 80
+    hostPort: 80
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 443
+    protocol: TCP
+EOF
+  312  [2025-05-12 09:38:25] cat <<EOF | kind create cluster --config=-
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "ingress-ready=true"
+  extraPortMappings:
+  - containerPort: 80
+    hostPort: 80
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 443
+    protocol: TCP
+EOF
+  318  [2025-05-12 09:53:38] cd k8s-course-lab-main/
+  319  [2025-05-12 09:53:39] ld
+  320  [2025-05-12 09:53:41] ls
+  321  [2025-05-12 09:53:47] cd auth
+  322  [2025-05-12 09:53:48] ls
+  323  [2025-05-12 09:53:54] cd ..
+  324  [2025-05-12 09:54:00] cd mysql-init/
+  325  [2025-05-12 09:54:02] ls
+  326  [2025-05-12 09:54:32] cd ..
+  327  [2025-05-12 09:54:36] cd kubernetes/
+  328  [2025-05-12 09:54:42] cd authentication/
+  329  [2025-05-12 09:54:44] ls
+  330  [2025-05-12 09:55:21] kubectl get svc
+  331  [2025-05-12 09:55:32] kubectl get pods
+  332  [2025-05-12 10:02:34] ls
+  334  [2025-05-12 10:02:45] cd mysql/
+  335  [2025-05-12 10:03:00] kubectl apply -f init-job.yaml 
+  336  [2025-05-12 10:03:07] kubectl get pods
+  337  [2025-05-12 10:04:50] kubectl apply -f headless-service.yaml 
+  338  [2025-05-12 10:04:59] kubectl apply -f statefulset.yaml 
+  339  [2025-05-12 10:05:02] kubectl get pods
+  340  [2025-05-12 10:05:56] watch kubectl get pods
+  341  [2025-05-12 10:07:02] kubectl logs pod/mysql-init-job-btvmg
+  342  [2025-05-12 10:07:38] kubectl get pods
+  343  [2025-05-12 10:07:52] kubectl stop *
+  344  [2025-05-12 10:07:58] kubectl man
+  345  [2025-05-12 10:08:05] kubectl --help
+  346  [2025-05-12 10:08:26] kubectl delete *
+  347  [2025-05-12 10:08:35] kubectl get pods
+  348  [2025-05-12 10:08:48] kubectl delete mysql-0
+  349  [2025-05-12 10:09:41] kubectl get svc
+  350  [2025-05-12 10:12:36] kubectl apply -f init-job.yaml 
+  351  [2025-05-12 10:12:56] kubectl get pods
+  352  [2025-05-12 10:12:59] kubectl apply -f init-job.yaml 
+  353  [2025-05-12 10:13:36] kubectl delete job -l job-name=mysql-init-job
+  354  [2025-05-12 10:13:41] kubectl get pods
+  355  [2025-05-12 10:14:16] kubectl delete pod mysql-0
+  356  [2025-05-12 10:14:18] kubectl get pods
+  357  [2025-05-12 10:15:15] kubectl logs mysql-0
+  358  [2025-05-12 10:15:37] kubectl get svc
+  359  [2025-05-12 10:16:11] kubectl describe pod mysql-0
+  361  [2025-05-12 10:18:47] kubectl delete secret mysql-secret
+  362  [2025-05-12 10:18:59] kubectl create secret generic mysql-secret   --from-literal=root-password='secure-root-pw'   --from-literal=auth-password='my-secret-pw'   --from-literal=secret-key='xco0sr0fh4e52x03g9mv'
+  363  [2025-05-12 10:19:13] kubectl get pods
+  364  [2025-05-12 10:19:20] kubectl delete pod mysql-0
+  365  [2025-05-12 10:19:25] kubectl get pods
+  366  [2025-05-12 10:19:43] kubectl describe pod mysql-0
+  367  [2025-05-12 10:21:02] kubectl apply -f headless-service.yaml
+  368  [2025-05-12 10:21:20] kubectl apply -f statefulset.yaml
+  369  [2025-05-12 10:21:31] kubectl delete pod mysql-0
+  370  [2025-05-12 10:21:41] kubectl get pods
+  371  [2025-05-12 10:22:36] kubectl delete statefulset mysql
+  372  [2025-05-12 10:22:51] kubectl delete pvc -l app=mysql
+  373  [2025-05-12 10:23:01] kubectl get pods
+  374  [2025-05-12 10:23:06] kubectl get svc
+  375  [2025-05-12 10:23:44] kubectl apply -f headless-service.yaml
+  376  [2025-05-12 10:23:54] kubectl apply -f
+  377  [2025-05-12 10:23:58] kubectl apply -f statefulset.yaml 
+  378  [2025-05-12 10:24:22] kubectl get pods
+  381  [2025-05-12 10:26:54] kubectl apply -f mysql-config.yaml
+  382  [2025-05-12 10:30:16] kubectl get pods
+  383  [2025-05-12 10:33:32] kubectl apply -f statefulset.yaml 
+  384  [2025-05-12 10:33:42] kubectl delete pod mysql-0
+  385  [2025-05-12 10:33:46] kubectl get pods
+  386  [2025-05-12 10:34:09] kubectl get svc
+  402  [2025-05-12 10:44:07] kubectl logs job/mysql-init-job
+  405  [2025-05-12 10:47:00] kubectl delete job mysql-init-job
+  406  [2025-05-12 10:47:18] kubectl apply -f your-corrected-job.yaml
+  407  [2025-05-12 10:47:23] kubectl apply -f init-job.yaml 
+  408  [2025-05-12 10:47:29] kubectl logs job/mysql-init-job
+  409  [2025-05-12 10:47:45] kubectl exec -it mysql-0 -- mysql -u authuser -p
+  410  [2025-05-12 10:50:32] cd ..
+  411  [2025-05-12 10:50:33] ls
+  412  [2025-05-12 10:50:42] kubectl apply -f deployment.yaml 
+  413  [2025-05-12 10:50:51] kubectl get pods
+  414  [2025-05-12 10:51:13] kubectl apply -f service.yaml 
+  415  [2025-05-12 10:51:19] kubectl get svc
+  416  [2025-05-12 10:51:25] kubectl get pods
+  417  [2025-05-12 10:58:21] kubectl run alpine --rm -it --image=alpine -- sh
+  418  [2025-05-12 11:00:09] ls
+  419  [2025-05-12 11:00:12] cd ..
+  420  [2025-05-12 11:00:13] ls
+  421  [2025-05-12 11:00:54] cd we
+  422  [2025-05-12 11:00:57] cd weather/
+  423  [2025-05-12 11:00:58] ls
+  424  [2025-05-12 11:10:08] kubectl create secret generic weather --from-literal=apikey=c2e37fb2c5msh790db791cdf91e1p170e58jsn7492d3cf5815
+  425  [2025-05-12 11:11:12] kubectl apply -f deployment.yaml 
+  426  [2025-05-12 11:11:18] kubectl apply -f service.yaml 
+  427  [2025-05-12 11:11:26] kubectl get pods
+  428  [2025-05-12 11:11:36] kubectl get svc
+  429  [2025-05-12 11:11:44] kubectl get pods
+  430  [2025-05-12 11:12:39] kubectl run alpine --rm -it --image=alpine -- sh
+  431  [2025-05-12 11:18:32] ls
+  432  [2025-05-12 11:18:36] cd ..
+  437  [2025-05-12 11:23:35] openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=weatherapp.local/0=weatherapp"
+  438  [2025-05-12 11:25:26] openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt
+  448  [2025-05-12 11:27:18] openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=weatherapp.local/O=weatherapp" -config "C:\Program Files\OpenSSL-Win64\bin\openssl.cfg"
+  449  [2025-05-12 11:30:05] kubectl apply -f deployment.yaml 
+  450  [2025-05-12 11:30:14] kubectl apply -f service.yaml 
+  451  [2025-05-12 11:30:56] kubectl apply -f ingress.yaml 
+  452  [2025-05-12 11:31:03] kubectl get pods
+  453  [2025-05-12 11:31:12] kubectl get svc
+  454  [2025-05-12 11:31:39] kubectl get ingress
+  455  [2025-05-12 11:31:46] kubectl get pods
+  456  [2025-05-12 11:32:18] kubectl describe pod release-name-weatherapp-ui-74859f64bf-2drrw 
+  457  [2025-05-12 11:32:27] kubectl get pods
+  458  [2025-05-12 11:32:50] kubectl describe pod release-name-weatherapp-ui-74859f64bf-2drrw 
+  459  [2025-05-12 11:33:08] kubectl get pods
+  460  [2025-05-12 11:34:18] kubectl describe pod release-name-weatherapp-ui-74859f64bf-2drrw 
+  461  [2025-05-12 11:35:53] kubectl get pods
+  462  [2025-05-12 11:36:46] kubectl get ingress
+
+  470  [2025-05-12 11:45:25] curl  http://localhost:8080
+  471  [2025-05-12 11:46:39] history
+  472  [2025-05-12 11:47:23] history >> command.txt
